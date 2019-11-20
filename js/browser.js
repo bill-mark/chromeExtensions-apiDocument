@@ -1,8 +1,8 @@
-let anniu_1 = document.getElementById('changeColor');
+let changeColor = document.getElementById('changeColor');
   
-  anniu_1.onclick = function(element) {
+  changeColor.onclick = function(element) {
   	
-    let color = "yellow";
+    let color = "green";
     chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
       chrome.tabs.executeScript(
           tabs[0].id,

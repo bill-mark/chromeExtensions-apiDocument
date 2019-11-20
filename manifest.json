@@ -4,11 +4,11 @@
 	"version":"0.1",
 	"description":"这是demo1",
 	"browser_action":{
-		"default_popup":"home.html",
+		"default_popup":"browser.html",
 		"default_title": "这是一个示例Chrome插件",
-		"default_icon":"logo.png"
+		"default_icon":"./icons/logo.png"
 	},
-	"devtools_page":"devtools.html",
+	"devtools_page":"devtools-background.html",
 	"commands": {
       "_execute_browser_action": {
         "suggested_key": {
@@ -17,5 +17,15 @@
         },
         "description": "Opens hello.html"
       }
-    }
+    },
+    "permissions":["activeTab","declarativeContent","storage"],
+    "background":{
+    	"scripts":["js/background.js"],
+    	"persistent": false
+    },
+    "web_accessible_resources": [
+        "devtools.html",
+        "devtools-background.html",
+        "js/inject.js"
+    ]
 }
