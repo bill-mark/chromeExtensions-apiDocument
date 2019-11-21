@@ -1,26 +1,17 @@
-chrome.devtools.panels.create('CloneApi', '', 'devtools.html', function(panel)
-{
-	
-
-});
-
+let exportjson = document.getElementById('export_json');
+  
+exportjson.onclick = function(element) {
+    //var bg = chrome.extension.getBackgroundPage();
+    //bg.test(); // 访问bg的函数 
+    export_file(entries)
+};
 
 
 let entries = []
-
 chrome.devtools.network.onRequestFinished.addListener(
    function(data){
    	   let re_hear = data.request.headers    
        let rs_hear = data.response.headers
-
-       //排除keep-alive
-       // let connection_state = rs_hear.some( (item)=>{
-       //    return item.value === 'close'
-       // })
-       // if(!connection_state){
-       //   return
-       // }
-
 
        //判断异步请求
        let async_state = re_hear.some( (item)=>{
@@ -30,15 +21,17 @@ chrome.devtools.network.onRequestFinished.addListener(
           data.getContent( function(cot){
             let dd =  handle_ajax(data)
             dd.response.content = cot
-            console.log('+++++++')
-            console.log(dd)
+            // console.log('+++++++')
+            //console.log(dd)
+
+            entries.push(dd)
+
+            let results = document.getElementById('results');
+            results.innerHTML = JSON.stringify(entries,null,"\t")
           })
        }
-
    }
 )
-
-
 function handle_ajax(data){
   //console.log('----------------------------------------------------------')
  // console.log(data)
@@ -77,12 +70,20 @@ function handle_ajax(data){
 }
 
 
-chrome.devtools.network.getHAR( (harlog)=>{
-    return
-	console.log('harlog')
-	console.log(harlog)
+//排除keep-alive
+function check_keepalive(rs_hear){
+    let connection_state = rs_hear.some( (item)=>{
+       return item.value === 'close'
+    })
+    if(!connection_state){
+      return
+    }
+}
 
-    var saveAs = saveAs
+
+//导出json
+function export_file(data){
+	var saveAs = saveAs
       // IE 10+ (native saveAs)
       || (typeof navigator !== "undefined" &&
           navigator.msSaveOrOpenBlob && navigator.msSaveOrOpenBlob.bind(navigator))
@@ -302,6 +303,10 @@ chrome.devtools.network.getHAR( (harlog)=>{
     	|| this.content
     ));
 
-	var blob = new Blob([JSON.stringify(harlog)],{type: "text/plain;charset=utf-8"})
-	//saveAs(blob,"hello1.json")
-})
+	var blob = new Blob([JSON.stringify(data,null,"\t")],{type: "text/plain;charset=utf-8"})
+	saveAs(blob,"api.json")
+}
+
+
+
+
