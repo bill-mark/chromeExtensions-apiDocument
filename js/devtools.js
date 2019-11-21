@@ -5,35 +5,7 @@ chrome.devtools.panels.create('ApiMan', '', 'panel.html', function(panel)
 });
 
 
-// let entries = []
 
-// chrome.devtools.network.onRequestFinished.addListener(
-//    function(data){
-//    	   let re_hear = data.request.headers    
-//        let rs_hear = data.response.headers
-
-//        //排除keep-alive
-//        // let connection_state = rs_hear.some( (item)=>{
-//        //    return item.value === 'close'
-//        // })
-//        // if(!connection_state){
-//        //   return
-//        // }
-
-//        //判断异步请求
-//        let async_state = re_hear.some( (item)=>{
-//           return (item.name === 'Sec-Fetch-Mode' && item.value === 'cors') || (item.name === 'X-Requested-With' && item.value === 'XMLHttpRequest')
-//        })
-//        if(async_state){
-//           data.getContent( function(cot){
-//             let dd =  handle_ajax(data)
-//             dd.response.content = cot
-//             console.log('+++++++')
-//             console.log(dd)
-//           })
-//        }
-//    }
-// )
 
 
 // function handle_ajax(data){
