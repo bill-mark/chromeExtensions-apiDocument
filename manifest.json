@@ -1,31 +1,17 @@
 {
 	"manifest_version":2,
-	"name":"demo1",
+	"name":"apiman",
 	"version":"0.1",
-	"description":"这是demo1",
+	"description":"欢迎使用",
 	"browser_action":{
 		"default_popup":"browser.html",
-		"default_title": "这是一个示例Chrome插件",
+		"default_title": "接口归纳插件",
 		"default_icon":"./icons/logo.png"
 	},
 	"devtools_page":"devtools.html",
-	"commands": {
-      "_execute_browser_action": {
-        "suggested_key": {
-          "default": "Ctrl+Shift+F",
-          "mac": "MacCtrl+Shift+F"
-        },
-        "description": "Opens hello.html"
-      }
-    },
-    "permissions":["activeTab","declarativeContent","storage"],
-    "background":{
-    	"scripts":["js/background.js"],
-    	"persistent": false
-    },
-    "web_accessible_resources": [
-        "devtools.html",
-        "js/panel.js",
-        "js/inject.js"
-    ]
+  "permissions":["activeTab","declarativeContent","storage"],
+  "background":{
+  	"scripts":["js/background.js"],
+  	"persistent": false
+  }
 }

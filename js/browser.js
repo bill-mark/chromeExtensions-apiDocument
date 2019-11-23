@@ -2,7 +2,7 @@ let changeColor = document.getElementById('changeColor');
   
   changeColor.onclick = function(element) {
   	
-    let color = "green";
+    let color = "red";
     chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
       chrome.tabs.executeScript(
           tabs[0].id,
